@@ -2,12 +2,12 @@ $(document).ready(function () {
     populateButtons(searchArray, 'searchButton', '#buttonsArea')
 });
 
-var searchArray = ["Batman", "Superman", "Flash", "Aquaman", "Wonder Women"];
+var searchArray = ["Boston Bruins","Colorado Avalanche","Detriot Red Wings","Los Angeles Kings","Nashville Predators","New York Rangers", "St.Louis Blues", "Vancouver Canucks", "Vegas Godlen Knights"];
 
 function populateButtons(searchArray, classToAdd, areaToAddTo) {
     $(areaToAddTo).empty();
     for (var i = 0; i < searchArray.length; i++) {
-        var a = $('<button class="btn btn-danger" style="margin:1%; background-color:rgb(221, 94, 116); border:none">');
+        var a = $('<button class="btn btn-primary" style="font-family: Anton, sans-serif; margin:1%; color:rgb(211, 209, 209); border:2px solid rgb(80, 2, 2)">');
         a.addClass(classToAdd);
         a.attr('data-type', searchArray[i]);
         a.text(searchArray[i]);
