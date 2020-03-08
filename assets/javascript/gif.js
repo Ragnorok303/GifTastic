@@ -2,7 +2,7 @@ $(document).ready(function () {
     populateButtons(searchArray, 'searchButton', '#buttonsArea')
 });
 
-var searchArray = ["Boston Bruins","Colorado Avalanche","Detriot Red Wings","Los Angeles Kings","Nashville Predators","New York Rangers", "St.Louis Blues", "Vancouver Canucks", "Vegas Godlen Knights"];
+var searchArray = ["Boston Bruins", "Colorado Avalanche", "Detriot Red Wings", "Los Angeles Kings", "Nashville Predators", "New York Rangers", "St.Louis Blues", "Vancouver Canucks", "Vegas Godlen Knights"];
 
 function populateButtons(searchArray, classToAdd, areaToAddTo) {
     $(areaToAddTo).empty();
@@ -20,43 +20,41 @@ $(document).on('click', '.searchButton', function () {
     var type = $(this).attr('data-type');
     var queryURL = "https://api.giphy.com/v1/gifs/search?q=" +
         type + "&api_key=BkaUZZWcFij6J7AoQj3WtPb1R2p9O6V9&limit=10";
-
+    
     $.ajax({
         url: queryURL,
         method: 'GET'
-    }).done(function (response) {
-
-        for (var i = 0; i < response.data.length; i++) {
-
-            $('#search-input').empty();
-            var searchDiv = $('<div class= "card" id= "search-item">');
-            var rating = response.data[i].rating;
-            var p = $('<p>').text('Rating: ' + rating).css({
-                "visibility": "visible",
-                "display": "block"
-            });
-
-            var animated = response.data[i].images.fixed_height.url;
-
-            var still = response.data[i].images.fixed_height_still.url;
-
-            var image = $('<img>');
-            image.attr('src', still);
-            image.attr('data-still', still);
-            image.attr('data-animated', animated);
-            image.attr('data-state', 'still');
-            image.addClass('searchImage');
-
-            searchDiv.append(p);
-
-            searchDiv.prepend(image);
-            $('#searches').append(searchDiv);
-        }
-
-
     })
 
+        .done(function (response) {
 
+            for (var i = 0; i < response.data.length; i++) {
+
+                $('#search-input').empty();
+                var searchDiv = $('<div class= "card" id= "search-item">');
+                var rating = response.data[i].rating;
+                var p = $('<p>').text('Rating: ' + rating).css({
+                    "visibility": "visible",
+                    "display": "block"
+                });
+
+                var animated = response.data[i].images.fixed_height.url;
+
+                var still = response.data[i].images.fixed_height_still.url;
+
+                var image = $('<img>');
+                image.attr('src', still);
+                image.attr('data-still', still);
+                image.attr('data-animated', animated);
+                image.attr('data-state', 'still');
+                image.addClass('searchImage');
+
+                searchDiv.append(p);
+
+                searchDiv.prepend(image);
+                $('#searches').append(searchDiv);
+            }
+        })
 })
 
 $(document).on('click', '.searchImage', function () {
@@ -75,5 +73,4 @@ $('.btn').on('click', function (event) {
     var newSearch = $('input').eq(0).val().toLowerCase();
     searchArray.push(newSearch);
     populateButtons(searchArray, 'searchButton', '#buttonsArea');
-
 });
